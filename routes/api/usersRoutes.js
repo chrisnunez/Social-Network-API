@@ -7,3 +7,5 @@ const {
     deleteUser,
 
 } = require('../../controllers/userController')
+
+module.exports = router;

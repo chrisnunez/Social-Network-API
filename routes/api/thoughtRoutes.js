@@ -7,4 +7,6 @@ const {
     deleteThought,
 } = require('../../controllers/thoughtController')
 
-router.route('/').get(gettAllThoughts).post()
+router.route('/').get(getAllThoughts).post()
+
+module.exports = router;
