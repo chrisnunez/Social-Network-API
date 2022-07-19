@@ -5,7 +5,11 @@ const {Thought} = require('../models/Thought')
 module.exports = {
     // Get all Thoughts
     getAllThoughts(req, res) {
-        Thought.find()
+        Thought.find({})
+        .populate({
+            path: 'reactions',
+            select: '-__v'
+        })
         .then((thoughts) => res.json(thoughts))
         .catch((thoughts) => res.status(500).json(thoughts))
     },
