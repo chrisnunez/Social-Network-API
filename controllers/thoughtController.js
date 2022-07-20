@@ -1,5 +1,5 @@
 // const {User, Thought} = require("../models");
-const {User } = require('../models/User');
+const {User} = require('../models/User');
 const {Thought} = require('../models/Thought')
 
 module.exports = {
@@ -24,18 +24,18 @@ module.exports = {
         .catch((err) => res.status(500).json(err))
     },
     // Create a Thought
-    createThought({ params, body}, res) {
+    createThought({ body}, res) {
         Thought.create(body)
         .then(({_id}) => {
             return User.findOneAndUpdate(
                 {_id: body.userId},
-                {$push: {thoughts: _id}},
+                {$push: {thoughts: _id } },
                 {new: true}
             );
         })
         .then((dbUserData) => {
             !dbUserData
-            ? res.status(400).json({message: 'Thought created but not user with this Id'})
+            ? res.status(400).json({message: 'Thought created but no user with this Id'})
             : res.json({message: 'Thought successfully created!'});
         })
         .catch((err) => res.json(err));

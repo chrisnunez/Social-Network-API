@@ -46,8 +46,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Delete a User
-  deleteUser(req, res) {
-    User.findOneAndRemove({ _id: req.params.userId })
+  deleteUser({params}, res) {
+    User.findOneAndDelete({ _id: params.id })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found with that id" })
@@ -65,7 +65,7 @@ module.exports = {
     .then((dbUser) => {
       !dbUser
       ? res.status(404).json({message: "No user found with that id"})
-      : res.json({User: "User successfully deleted!"})
+      : res.json({User: "Friend successfully Added!"})
     })
     .catch((err) => res.status(500).json(err))
   },
